@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Belajar Validasi</title>
+	<link rel="stylesheet" href="bootstrap2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap2/css/bootstrap-theme.min.css">
+	<script src="jquery.min.js"></script>
+	<script src="bootstrap2/js/bootstrap.min.js"></script>
+    <script src="formvalidation.js"></script>
+    <script src="formvalidation2.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<div class="page-header row" style="border:none;">
+		<div class="col-md-5">
+			<form id="formContoh">
+				<div class="form-group">
+					<label>Nilai</label>
+					<input type="number" name="nilai" id="nilai" placeholder="Nilai" class="form-control" min="0" max="100" required data-fv-stringlength-message="Inputan Harus Angka">
+				</div>
+				<div class="form-group">
+					<label>Username</label>
+					<input type="text" name="username" id="username" placeholder="Username" class="form-control" minlength="4" data-fv-stringlength-message="Username harus lebih dari 5 Karakter">
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" name="password" id="password" placeholder="Password" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Confirm Password</label>
+					<input type="password" name="repassword" placeholder="Password" class="form-control">
+				</div>
+				<div class="form-group">
+					<label>Email</label>
+					<input type="text" name="emailUser" id="emailUser" placeholder="Email" class="form-control">
+				</div>
+				<div class="form-group">
+					<input type="submit" class="btn btn-primary" value="Submit">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+    });
+
+$(document).ready (function() {
+	$('#formContoh').formValidation({
+
+		icon: {
+			valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+		},
+
+		fields: {
+			username: {
+				validators: {
+					notEmpty: {
+						message: 'Username Tidak Boleh Kosong'
+					}
+				}
+			},
+			password: {
+				validators: {
+					notEmpty: {
+						message: 'Password Tidak Boleh Kosong'
+					},
+					identical: {
+						field: 'repassword',
+						message: 'Password Tidak sama'
+					}					
+				}
+			},
+			repassword: {
+				validators: {
+					notEmpty: {
+						message: 'Confirm Password Tidak Sama'
+					},
+					identical: {
+						field: 'password',
+						message: 'Password Tidak sama'
+					}					
+				}
+			},
+			emailUser: {
+				validators: {
+					notEmpty: {
+						message: 'Email Tidak Boleh Kosong'
+					},
+					emailAddress: {
+						message: 'Email Tidak Valid'
+					}
+				}
+			}
+		}
+	})
+});
+</script>
+
+</body>
+</html>
